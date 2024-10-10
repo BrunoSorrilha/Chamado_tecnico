@@ -1,0 +1,48 @@
+CREATE TABLE Usuario (
+ID_usuario int(255) PRIMARY KEY,
+Nome varchar(255),
+Email varchar(255),
+Cpf int(11),
+telefone int(11),
+Administrator bit,
+Complemento int(255),
+Estado varchar(255),
+Cidade varchar(255),
+Numero int(255),
+Rua varchar(255),
+Cep int(8)
+)
+
+CREATE TABLE Tecnico (
+ID_tecnico int(255) PRIMARY KEY,
+Email varchar(255),
+Telefone int(11),
+Nome Varchar(255),
+Formação Varchar(255)
+)
+
+CREATE TABLE Pedido (
+Id_pedido int(255) PRIMARY KEY,
+Data Date,
+Descrição varchar(255),
+Solucao varchar(255),
+ID_usuario int(255),
+ID_status int(255),
+ID_tecnico int(255),
+FOREIGN KEY(ID_usuario) REFERENCES Usuario (ID_usuario),
+FOREIGN KEY(ID_tecnico) REFERENCES Tecnico (ID_tecnico)
+)
+
+CREATE TABLE Dispositivo (
+ID_dispositivo int(255) PRIMARY KEY,
+Tipo Varchar(255),
+Id_pedido int(255),
+FOREIGN KEY(Id_pedido) REFERENCES Pedido (Id_pedido)
+)
+
+CREATE TABLE Status (
+ID_status int(255) PRIMARY KEY,
+Tipo varchar(255)
+)
+
+ALTER TABLE Pedido ADD FOREIGN KEY(ID_status) REFERENCES Status (ID_status)
