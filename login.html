@@ -23,16 +23,18 @@
 							<div class="card-3d-wrapper">
 								<div class="card-front">
 									<div class="center-wrap">
-										<div class="section text-center">
-											<h4 class="mb-4 pb-3">Entrar</h4>
-											<div class="form-group">
-												<input type="email" class="form-style" placeholder="Email">
-												<i class="input-icon uil uil-at"></i>
-											</div>	
-											<div class="form-group mt-2">
-												<input type="password" class="form-style" placeholder="Senha">
-												<i class="input-icon uil uil-lock-alt"></i>
-											</div>
+										<form action="processo_login.php" method="POST">
+											<div class="section text-center">
+												<h4 class="mb-4 pb-3">Entrar</h4>
+												<div class="form-group">
+													<input type="email" class="form-style" placeholder="Email" value="">
+													<i class="input-icon uil uil-at"></i>
+												</div>	
+												<div class="form-group mt-2">
+													<input type="password" class="form-style" placeholder="Senha" value="">
+													<i class="input-icon uil uil-lock-alt"></i>
+												</div>
+											</form>
 											<a href="#" class="btn mt-4">Entrar</a>
                       <p class="mb-0 mt-4 text-center"><a href="password.html" class="link">Esqueceu sua senha ?</a></p>
 				      					</div>
@@ -42,23 +44,25 @@
 									<div class="center-wrap">
 										<div class="section text-center">
 											<h4 class="mb-3 pb-3">Registrar-se</h4>
-											<div class="form-group">
-												<input type="text" class="form-style" placeholder="Nome">
-												<i class="input-icon uil uil-user"></i>
-											</div>	
-											<div class="form-group mt-2">
-												<input type="tel" class="form-style" placeholder="Numero de telefone">
-												<i class="input-icon uil uil-phone"></i>
-											</div>	
-                      <div class="form-group mt-2">
-												<input type="email" class="form-style" placeholder="Email">
-												<i class="input-icon uil uil-at"></i>
-											</div>
-											<div class="form-group mt-2">
-												<input type="password" class="form-style" placeholder="Senha">
-												<i class="input-icon uil uil-lock-alt"></i>
-											</div>
-											<a href="#" class="btn mt-4">Registrar-se</a>
+											<form action="registro.php" method="POST">
+												<div class="form-group">
+													<input type="text" class="form-style" name="Nome" placeholder="Nome" value="">
+													<i class="input-icon uil uil-user"></i>
+												</div>	
+												<div class="form-group mt-2">
+													<input type="text" class="form-style" name="telefone" placeholder="Numero de telefone" value="">
+													<i class="input-icon uil uil-phone"></i>
+												</div>	
+												<div class="form-group mt-2">
+													<input type="text" class="form-style" name="Email" placeholder="Email" value="">
+													<i class="input-icon uil uil-at"></i>
+												</div>
+												<div class="form-group mt-2">
+													<input type="password" class="form-style" name="senha" placeholder="senha" value="">
+													<i class="input-icon uil uil-lock-alt"></i>
+												</div>
+												<a href="#" class="btn mt-4"> <button type="submit"> Registrar-se </button></a>
+											</form>
 				      					</div>
 			      					</div>
 			      				</div>

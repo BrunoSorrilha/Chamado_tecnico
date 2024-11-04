@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11-Out-2024 às 14:53
--- Versão do servidor: 10.4.22-MariaDB
--- versão do PHP: 8.1.2
+-- Tempo de geração: 04-Nov-2024 às 16:19
+-- Versão do servidor: 10.4.27-MariaDB
+-- versão do PHP: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ USE `chamado_tecnico`;
 CREATE TABLE `dispositivo` (
   `ID_dispositivo` int(255) NOT NULL,
   `Tipo` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `dispositivo`
@@ -69,7 +69,7 @@ CREATE TABLE `pedido` (
   `ID_status` int(255) DEFAULT NULL,
   `ID_tecnico` int(255) DEFAULT NULL,
   `ID_dispositivo` int(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -80,7 +80,7 @@ CREATE TABLE `pedido` (
 CREATE TABLE `status` (
   `ID_status` int(255) NOT NULL,
   `Tipo` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -94,7 +94,7 @@ CREATE TABLE `tecnico` (
   `Telefone` int(11) DEFAULT NULL,
   `Nome` varchar(255) DEFAULT NULL,
   `Formação` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -106,16 +106,10 @@ CREATE TABLE `usuario` (
   `ID_usuario` int(255) NOT NULL,
   `Nome` varchar(255) DEFAULT NULL,
   `Email` varchar(255) DEFAULT NULL,
-  `Cpf` int(11) DEFAULT NULL,
   `telefone` int(11) DEFAULT NULL,
   `Administrator` bit(1) DEFAULT NULL,
-  `Complemento` int(255) DEFAULT NULL,
-  `Estado` varchar(255) DEFAULT NULL,
-  `Cidade` varchar(255) DEFAULT NULL,
-  `Numero` int(255) DEFAULT NULL,
-  `Rua` varchar(255) DEFAULT NULL,
-  `Cep` int(8) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `senha` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Índices para tabelas despejadas
