@@ -1,21 +1,29 @@
 <?php
 
-require 'conecta.php';
+include 'conectar.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['Email'];
-    $password = $_POST['senha'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $telefone = $_POST['telefone'];
+    $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
 
-    $hashedPassword = password_hash($password, 1234);
+    $stmt = $pdo->prepare("SELECT * FROM usuario WHERE email = ?");
+    $stmt->execute([$email]);
 
-    $sql = "INSERT INTO usuario (Email, senha) VALUES (:email, :password)";
-    $stmt = $pdo->prepare($sql);
-    
-    try {
-        $stmt->execute(['Email' => $email, 'senha' => $hashedPassword]);
-        echo "Usuário registrado com sucesso!";
-    } catch (PDOException $e) {
-        echo "Erro ao registrar usuário: " . $e->getMessage();
+    if ($stmt->rowCount() > 0) {
+        echo "Este email já foi registrado.";
+    } else {
+        
+        $stmt = $pdo->prepare("INSERT INTO usuario (nome, email, telefone, senha) VALUES (?, ?, ?, ?)");
+        if ($stmt->execute([$nome, $email, $telefone, $senha])) {
+            echo "Usuário registrado com sucesso!";
+
+            header("Location: login.html");
+            exit(); 
+        } else {
+            echo "Erro ao registrar o usuário.";
+        }
     }
 }
 ?>
