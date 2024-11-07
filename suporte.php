@@ -1,3 +1,9 @@
+<?php
+
+session_start()
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -38,7 +44,7 @@
                     
                     <textarea id="descricao" name="descricao" placeholder="Descreva com detalhes seu problema"></textarea>
                     
-                    <a href="gen.html"> <button type="submit">ENVIAR</button></a>
+                    <a href="pay.html"> <button type="submit">ENVIAR</button></a>
                 </div>
             </div>
         </div>

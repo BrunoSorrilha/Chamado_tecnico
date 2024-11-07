@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04-Nov-2024 às 16:19
+-- Tempo de geração: 07-Nov-2024 às 16:40
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.0.25
 
@@ -67,8 +67,7 @@ CREATE TABLE `pedido` (
   `Solucao` varchar(255) DEFAULT NULL,
   `ID_usuario` int(255) DEFAULT NULL,
   `ID_status` int(255) DEFAULT NULL,
-  `ID_tecnico` int(255) DEFAULT NULL,
-  `ID_dispositivo` int(255) DEFAULT NULL
+  `ID_tecnico` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -105,11 +104,21 @@ CREATE TABLE `tecnico` (
 CREATE TABLE `usuario` (
   `ID_usuario` int(255) NOT NULL,
   `Nome` varchar(255) DEFAULT NULL,
-  `Email` varchar(255) DEFAULT NULL,
+  `Email` varchar(255) NOT NULL,
   `telefone` int(11) DEFAULT NULL,
   `Administrator` bit(1) DEFAULT NULL,
   `senha` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `usuario`
+--
+
+INSERT INTO `usuario` (`ID_usuario`, `Nome`, `Email`, `telefone`, `Administrator`, `senha`) VALUES
+(1, 'kauan', 'kauan@email.com', 2147483647, NULL, '$2y$10$06y8.Bw/e1lr3QGH2W62kOM119gIPMUfneUo4DTQ8Tz56VNSRU8Tq'),
+(2, 'vinicius', 'vcin@gmail.com', 2147483647, NULL, '$2y$10$ot1Byp5CGP.ZXfATByW1CejQ5xcbzdWKRQy3ujZ6i3Ve1FRNgssqi'),
+(3, 'dANIEL', 'DANIEL@GMAIL.COM', 2147483647, NULL, '$2y$10$l.QIU6vAWiKFJ/1KzJrHeOlWlBh5Zf41JOR7.GNgskYpyV39RCl7u'),
+(4, 'joao', 'joaomorangoni@gmail.com', 2147483647, NULL, '$2y$10$8B..TmabyKIUm.SLcD6T0ub7w/MwAlbibyHj2Txghf6rycxFEk1z.');
 
 --
 -- Índices para tabelas despejadas
@@ -127,9 +136,8 @@ ALTER TABLE `dispositivo`
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`Id_pedido`),
   ADD KEY `ID_usuario` (`ID_usuario`),
-  ADD KEY `ID_dispositivo` (`ID_dispositivo`),
-  ADD KEY `ID_tecnico` (`ID_tecnico`),
-  ADD KEY `ID_status` (`ID_status`);
+  ADD KEY `ID_status` (`ID_status`),
+  ADD KEY `ID_tecnico` (`ID_tecnico`);
 
 --
 -- Índices para tabela `status`
@@ -147,7 +155,24 @@ ALTER TABLE `tecnico`
 -- Índices para tabela `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`ID_usuario`);
+  ADD PRIMARY KEY (`ID_usuario`),
+  ADD UNIQUE KEY `Email` (`Email`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `pedido`
+--
+ALTER TABLE `pedido`
+  MODIFY `Id_pedido` int(255) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `ID_usuario` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restrições para despejos de tabelas
@@ -158,9 +183,8 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `pedido`
   ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`ID_usuario`) REFERENCES `usuario` (`ID_usuario`),
-  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`ID_dispositivo`) REFERENCES `dispositivo` (`ID_dispositivo`),
-  ADD CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`ID_tecnico`) REFERENCES `tecnico` (`ID_tecnico`),
-  ADD CONSTRAINT `pedido_ibfk_4` FOREIGN KEY (`ID_status`) REFERENCES `status` (`ID_status`);
+  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`ID_status`) REFERENCES `status` (`ID_status`),
+  ADD CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`ID_tecnico`) REFERENCES `tecnico` (`ID_tecnico`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -4,7 +4,6 @@ let couponAwarded = false;
 // Função para carregar os dados do perfil ao abrir a página de perfil
 window.onload = function() {
     const storedProfile = JSON.parse(localStorage.getItem('profileData')) || {
-        name: 'Cliente',
         username: 'cliente12345',
         bio: 'Seja bem-vindo(a) ao nosso site! Aqui você encontra os melhores serviços em tecnologia e suporte técnico.',
         image: './img/foto1.png' // Imagem padrão

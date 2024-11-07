@@ -67,7 +67,7 @@ document.getElementById('editProfileForm').addEventListener('submit', function(e
     localStorage.setItem('profileData', JSON.stringify(profileData));
 
     // Redireciona para a página de perfil após salvar
-    window.location.href = 'editcar.html';
+    window.location.href = 'editcar.php';
 });
 
 // Função para remover a imagem e voltar à seleção aleatória

@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION['nome'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$nome = $_SESSION['nome'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -12,11 +25,11 @@
         <div class="profile-pic">
             <img id="profileImage" src="./img/foto1.png" alt="Foto de perfil">
         </div>
-        <h1 id="profileName">Kauan Venancio</h1>
-        <h2 id="profileUsername">Vrodrigueskauan</h2>
-        <p id="profileBio">Eu sou Kauan Venancio, aluno da Etec MCM em Ribeirão Pires; Os repositórios desse perfil estão de acordo com as aulas.</p>
-        <a href="edit.html"><button class="edit-btn">Editar perfil</button></a>
-        <a href="home.html"><button class="edit-btn">inicio</button></a>
+        <h1><?php echo htmlspecialchars($nome);?></h1>
+        <p id="profileBio">Olá, sou novo aqui no Byte Amigo!.</p>
+        <a href="edit.php"><button class="edit-btn">Editar perfil</button></a>
+        <a href="home.php"><button class="edit-btn">inicio</button></a>
+        <p class="edit-btn"><a href="password.html" class="link">Esqueceu sua senha ?</a></p>
     </div>
 
     <script src="./js/carregar.js"></script>

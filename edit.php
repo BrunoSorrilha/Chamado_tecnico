@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION['nome'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$nome = $_SESSION['nome'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -23,13 +36,13 @@
 
             <!-- Campos de texto para edição -->
             <label for="name">Nome:</label>
-            <input type="text" id="name" placeholder="Nome Completo" value="Cliente">
+            <input type="text" id="name" placeholder="Nome Completo" value=<?php echo htmlspecialchars($nome);?>>
 
             <label for="username">Usuario:</label>
             <input type="text" id="username" placeholder="Nome de Usuário" value="cliente12345">
 
             <label for="bio">Biografia:</label>
-            <textarea id="bio" rows="4" placeholder="Escreva algo sobre você">Seja bem-vindo(a) ao nosso site! Aqui você encontra os melhores serviços em tecnologia e suporte técnico.</textarea>
+            <textarea id="bio" rows="4" placeholder="Escreva algo sobre você">Olá, sou novo aqui no Byte Amigo!</textarea>
 
             <!-- Botões de ação -->
             <button type="submit" class="save-btn">Salvar</button>

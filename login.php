@@ -14,10 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Login realizado com sucesso!";
         
         session_start();
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['nome'] = $user['nome'];
+        $_SESSION['user_id'] = $user['ID_usuario'];
+        $_SESSION['nome'] = $user['Nome'];
 
-        header("Location: home.html");
+        header("Location: home.php");
         exit(); 
     } else {
         echo "Email ou senha inválidos.";
