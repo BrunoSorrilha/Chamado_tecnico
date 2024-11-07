@@ -104,11 +104,19 @@ h1 {
 }
 
 .button {
-    background: #198754;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 15px 20px;
+    background-color: #1f2029 ;
+    font-family: 'minecraft', sans-serif;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    outline: none;
+    -moz-user-select: none;
+    user-select: none;
+    color: #198754;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 2em;
+    padding: 1em;
+    transition: 1s;;
     font-size: 18px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     cursor: pointer;

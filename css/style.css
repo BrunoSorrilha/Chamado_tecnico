@@ -183,3 +183,25 @@ display: none;
   color: blueviolet;
   box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
+
+
+button{
+  background-color: #1f2029 ;
+  font-family: 'minecraft', sans-serif;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  outline: none;
+  -moz-user-select: none;
+  user-select: none;
+  color: #198754;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 2em;
+  padding: 1em;
+  transition: 1s;
+}
+   
+
+
+button:hover {
+  background-color: rgb(57, 19, 92); }
