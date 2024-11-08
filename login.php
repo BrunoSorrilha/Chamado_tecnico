@@ -16,11 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         session_start();
         $_SESSION['user_id'] = $user['ID_usuario'];
         $_SESSION['nome'] = $user['Nome'];
+        $_SESSION['adm'] = $user['Administrator'];
 
         header("Location: home.php");
         exit(); 
     } else {
-        echo "Email ou senha inválidos.";
+        header("Location: errosenha.html");
+        exit();
     }
 }
 ?>

@@ -1,0 +1,52 @@
+            
+button{
+    background-color: #272727 ;
+    font-family: 'minecraft', sans-serif;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    outline: none;
+    -moz-user-select: none;
+    user-select: none;
+    color: #ffffff;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 2em;
+    transition: 1s;
+    margin-bottom: 4em;
+    padding: 0.5em;
+  }
+     
+  
+  
+  button:hover {
+    background-color: rgb(77, 77, 77); }
+
+
+th, td, label {
+    color: rgb(112, 112, 112);
+}
+
+option {
+    padding: 10px 20px;
+    background-color: #333; /* Cor de fundo inicial */
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave */
+}
+
+option:hover {
+    background-color: #a944ff; 
+    color: #fff; 
+}
+
+select, input {
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #444;
+    color: #fff;
+    font-family: 'minecraft', sans-serif;
+}

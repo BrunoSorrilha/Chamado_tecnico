@@ -32,19 +32,19 @@ session_start()
                 
                 <div class="form-container" style="padding-right: 7px ;">
 
-                   
-                    
-                    
-                    <select id="servico" name="servico">
-                        <option value="default">Escolha um servico...</option> <!-- Essa opção alterna -->
-                        <option value="infraestrutura">Manutencao de Infraestrutura</option>
-                        <option value="software">Manutencao de Software</option>
-                        <option value="consultoria">Consultoria</option>
-                    </select>
-                    
-                    <textarea id="descricao" name="descricao" placeholder="Descreva com detalhes seu problema"></textarea>
-                    
-                    <a href="pay.html"> <button type="submit">ENVIAR</button></a>
+                    <form action="registrar_pedido.php" method="POST">
+                        <select id="servico" name="servico">
+                            <option value="default">Escolha um servico...</option>
+                            <option value="infraestrutura">Manutenção de Infraestrutura</option>
+                            <option value="software">Manutenção de Software</option>
+                            <option value="consultoria">Consultoria</option>
+                        </select>
+                        
+                        <textarea id="descricao" name="descricao" placeholder="Descreva com detalhes seu problema"></textarea>
+                        
+                        <button type="submit">ENVIAR</button>
+                    </form>  
+                
                 </div>
             </div>
         </div>

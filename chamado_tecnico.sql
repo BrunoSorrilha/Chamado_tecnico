@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07-Nov-2024 às 16:40
--- Versão do servidor: 10.4.27-MariaDB
--- versão do PHP: 8.0.25
+-- Tempo de geração: 08/11/2024 às 18:51
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,79 +26,28 @@ USE `chamado_tecnico`;
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `dispositivo`
+-- Estrutura para tabela `pedidos`
 --
 
-CREATE TABLE `dispositivo` (
-  `ID_dispositivo` int(255) NOT NULL,
-  `Tipo` varchar(255) DEFAULT NULL
+CREATE TABLE `pedidos` (
+  `id` int(11) NOT NULL,
+  `ID_usuario` int(11) DEFAULT NULL,
+  `servico` varchar(50) NOT NULL,
+  `descricao` text DEFAULT NULL,
+  `data_pedido` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `dispositivo`
+-- Despejando dados para a tabela `pedidos`
 --
 
-INSERT INTO `dispositivo` (`ID_dispositivo`, `Tipo`) VALUES
-(1, 'Mouse'),
-(2, 'Monitor'),
-(3, 'Teclado'),
-(4, 'Carregador'),
-(5, 'Gabinete'),
-(6, 'Pasta Térmica'),
-(7, 'Ventoinha'),
-(8, 'Televisão'),
-(9, 'Porta USB'),
-(10, 'Porta RJ45'),
-(11, 'Fonte'),
-(12, 'Roteador'),
-(13, 'Memória'),
-(14, 'Indefinido');
+INSERT INTO `pedidos` (`id`, `ID_usuario`, `servico`, `descricao`, `data_pedido`) VALUES
+(3, 5, 'infraestrutura', 'deu problema aqui', '2024-11-08 17:27:18');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pedido`
---
-
-CREATE TABLE `pedido` (
-  `Id_pedido` int(255) NOT NULL,
-  `Data` date DEFAULT NULL,
-  `Descrição` varchar(255) DEFAULT NULL,
-  `Solucao` varchar(255) DEFAULT NULL,
-  `ID_usuario` int(255) DEFAULT NULL,
-  `ID_status` int(255) DEFAULT NULL,
-  `ID_tecnico` int(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `status`
---
-
-CREATE TABLE `status` (
-  `ID_status` int(255) NOT NULL,
-  `Tipo` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `tecnico`
---
-
-CREATE TABLE `tecnico` (
-  `ID_tecnico` int(255) NOT NULL,
-  `Email` varchar(255) DEFAULT NULL,
-  `Telefone` int(11) DEFAULT NULL,
-  `Nome` varchar(255) DEFAULT NULL,
-  `Formação` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `usuario`
+-- Estrutura para tabela `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -111,80 +60,58 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `usuario`
+-- Despejando dados para a tabela `usuario`
 --
 
 INSERT INTO `usuario` (`ID_usuario`, `Nome`, `Email`, `telefone`, `Administrator`, `senha`) VALUES
 (1, 'kauan', 'kauan@email.com', 2147483647, NULL, '$2y$10$06y8.Bw/e1lr3QGH2W62kOM119gIPMUfneUo4DTQ8Tz56VNSRU8Tq'),
 (2, 'vinicius', 'vcin@gmail.com', 2147483647, NULL, '$2y$10$ot1Byp5CGP.ZXfATByW1CejQ5xcbzdWKRQy3ujZ6i3Ve1FRNgssqi'),
-(3, 'dANIEL', 'DANIEL@GMAIL.COM', 2147483647, NULL, '$2y$10$l.QIU6vAWiKFJ/1KzJrHeOlWlBh5Zf41JOR7.GNgskYpyV39RCl7u'),
-(4, 'joao', 'joaomorangoni@gmail.com', 2147483647, NULL, '$2y$10$8B..TmabyKIUm.SLcD6T0ub7w/MwAlbibyHj2Txghf6rycxFEk1z.');
+(5, 'Joao Pedro', 'joao@email.com', 953022544, b'1', '$2y$10$XQULcT6c2V7WiyTu97VqfukqSDAmvoXwxGOcKT4TIeHzQtQP58Bju'),
+(6, 'Anderson Vanin', 'anderson@email.com', 999999999, b'1', '$2y$10$e7KO9Uxxj/Vj4LCsZxr2beI/3pbSVRmfLtENI.VxfdJs8Ymc5HKoK');
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `dispositivo`
+-- Índices de tabela `pedidos`
 --
-ALTER TABLE `dispositivo`
-  ADD PRIMARY KEY (`ID_dispositivo`);
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ID_usuario` (`ID_usuario`);
 
 --
--- Índices para tabela `pedido`
---
-ALTER TABLE `pedido`
-  ADD PRIMARY KEY (`Id_pedido`),
-  ADD KEY `ID_usuario` (`ID_usuario`),
-  ADD KEY `ID_status` (`ID_status`),
-  ADD KEY `ID_tecnico` (`ID_tecnico`);
-
---
--- Índices para tabela `status`
---
-ALTER TABLE `status`
-  ADD PRIMARY KEY (`ID_status`);
-
---
--- Índices para tabela `tecnico`
---
-ALTER TABLE `tecnico`
-  ADD PRIMARY KEY (`ID_tecnico`);
-
---
--- Índices para tabela `usuario`
+-- Índices de tabela `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`ID_usuario`),
   ADD UNIQUE KEY `Email` (`Email`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
--- AUTO_INCREMENT de tabela `pedido`
+-- AUTO_INCREMENT de tabela `pedidos`
 --
-ALTER TABLE `pedido`
-  MODIFY `Id_pedido` int(255) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `pedidos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `ID_usuario` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID_usuario` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `pedido`
+-- Restrições para tabelas `pedidos`
 --
-ALTER TABLE `pedido`
-  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`ID_usuario`) REFERENCES `usuario` (`ID_usuario`),
-  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`ID_status`) REFERENCES `status` (`ID_status`),
-  ADD CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`ID_tecnico`) REFERENCES `tecnico` (`ID_tecnico`);
+ALTER TABLE `pedidos`
+  ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`ID_usuario`) REFERENCES `usuario` (`ID_usuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
