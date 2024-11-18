@@ -1,6 +1,10 @@
-            
+@font-face {
+    font-family: 'Minecraft';
+    src: url('../fontes/Minecrafter.Alt.ttf') format('truetype');
+}
+
 button{
-    background-color: #272727 ;
+    background-color: blueviolet ;
     font-family: 'minecraft', sans-serif;
     border: 1px solid #000000;
     border-radius: 5px;
@@ -14,16 +18,18 @@ button{
     transition: 1s;
     margin-bottom: 4em;
     padding: 0.5em;
+
   }
      
   
   
   button:hover {
-    background-color: rgb(77, 77, 77); }
+    background-color: #198754; }
 
 
 th, td, label {
-    color: rgb(112, 112, 112);
+    color: rgb(0, 0, 0);
+    font-family: 'minecraft', sans-serif;
 }
 
 option {

@@ -26,7 +26,7 @@ font-family: 'minecraft';
 --message-btn: #fff;
 }
 .dark:root {
---app-container: #1f1d2b;
+--app-container: #2600ff;
 --app-container: #111827;
 --main-color: #fff;
 --secondary-color: rgba(255, 255, 255, .8);
@@ -146,8 +146,8 @@ justify-content: space-between;
 align-items: center;
 width: 100%;
 max-width: 480px;
-color: var(--light-font);
-box-shadow: 0 2px 6px 0 rgba(136, 148, 171, .2), 0 24px 20px -24px rgba(71, 82, 107, .1);
+color: blueviolet;
+box-shadow: 0 2px 6px 0 #198754;
 overflow: hidden;
 }
 .dark .search-wrapper {
@@ -511,7 +511,7 @@ margin-bottom: 16px;
 color: var(--main-color);
 }
 .project-box-header span {
-color: #4a4a4a;
+color: #ff0000;
 opacity: 0.7;
 font-size: 14px;
 line-height: 16px;
@@ -644,9 +644,7 @@ flex-shrink: 0;
 padding: 6px 16px;
 font-weight: 700;
 }
-.mode-switch.active .moon {
-fill: var(--main-color);
-}
+
 .messages-btn {
 border-radius: 4px 0 0 4px;
 position: absolute;
