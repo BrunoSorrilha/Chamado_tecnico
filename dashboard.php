@@ -61,12 +61,7 @@ $pedidos = $stmt->fetchAll();
         </div>
         </div>
         <div class="app-header-right">
-        <button class="mode-switch" title="Switch Theme">
-        <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
-        <defs></defs>
-        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-        </svg>
-        </button>
+        
         <button class="add-btn" title="Add New Project">
         <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
         <line x1="12" y1="5" x2="12" y2="19" />
@@ -77,13 +72,13 @@ $pedidos = $stmt->fetchAll();
         <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
         <path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg>
         </button>
-        <button class="profile-btn">
+        <a href="editcar.php"><button   class="profile-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 19 19">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
               </svg>
         <span>ADMIN</span>
-        </button>
+        </button></a>
         </div>
         <button class="messages-btn">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle">
@@ -104,7 +99,7 @@ $pedidos = $stmt->fetchAll();
 
         <form method="GET" action="dashboard.php">
         <label for="servico">Filtrar por Servico:</label>
-        <select id="servico" name="servico">
+        <select class="" id="servico" name="servico">
             <option value="">Todos</option>
             <option value="infraestrutura" <?php if ($servicoFiltro == 'infraestrutura') echo 'selected'; ?>>Manutencao de Infraestrutura</option>
             <option value="software" <?php if ($servicoFiltro == 'software') echo 'selected'; ?>>Manutencao de Software</option>
@@ -122,7 +117,7 @@ $pedidos = $stmt->fetchAll();
                 <tr>
                     <th>Selecionar</th>
                     <th>ID Pedido</th>
-                    <th>ID Usuário</th>
+                    <th>ID Usuario</th>
                     <th>Servico</th>
                     <th>Descricao</th>
                     <th>Data do Pedido</th>

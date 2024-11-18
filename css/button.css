@@ -18,7 +18,7 @@ button{
     transition: 1s;
     margin-bottom: 4em;
     padding: 0.5em;
-
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
   }
      
   
@@ -28,8 +28,9 @@ button{
 
 
 th, td, label {
-    color: rgb(0, 0, 0);
+    color: rgb(225, 225, 225);
     font-family: 'minecraft', sans-serif;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 }
 
 option {
