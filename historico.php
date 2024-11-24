@@ -1,34 +1,49 @@
-<?php 
+<?php
 session_start();
-
 include 'conectar.php';
 
 
-$stmt = $pdo->prepare("SELECT * FROM pedidos ORDER BY data_pedido DESC");
-$stmt->execute();
-$pedidos = $stmt->fetchAll();
+if (!isset($_SESSION['user_id'])) {
+
+    header("Location: login.html");
+    exit();
+}
+
+$idUsuarioLogado = $_SESSION['user_id'];
 
 $servicoFiltro = $_GET['servico'] ?? '';
-$idUsuarioFiltro = $_GET['ID_usuario'] ?? '';
 
-$query = "SELECT * FROM pedidos WHERE 1=1";
-$params = [];
+$query = "
+    SELECT 
+        pedidos.id,
+        usuario.Nome,
+        usuario.telefone,
+        pedidos.status,
+        pedidos.servico,
+        pedidos.data_pedido
+    FROM 
+        pedidos
+    INNER JOIN 
+        usuario ON pedidos.ID_usuario = usuario.ID_usuario
+    WHERE pedidos.ID_usuario = ?
+";
 
-if ($servicoFiltro) {
-    $query .= " AND servico = ?";
+$params = [$idUsuarioLogado];
+
+if (!empty($servicoFiltro)) {
+    $query .= " AND pedidos.servico = ?";
     $params[] = $servicoFiltro;
 }
 
-if ($idUsuarioFiltro) {
-    $query .= " AND ID_usuario = ?";
-    $params[] = $idUsuarioFiltro;
-}
+$query .= " ORDER BY pedidos.data_pedido DESC";
 
-$query .= " ORDER BY data_pedido DESC";
 $stmt = $pdo->prepare($query);
 $stmt->execute($params);
 $pedidos = $stmt->fetchAll();
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -104,34 +119,33 @@ $pedidos = $stmt->fetchAll();
         </select>
         
         
-        <input type="text" id="id_usuario" name="id_usuario" value="<?php echo htmlspecialchars($idUsuarioFiltro); ?>">
 
         <button type="submit">Buscar</button>
     </form>
-        <table border="1">
-            <thead>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID Pedido</th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Status</th>
+                <th>Serviço</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($pedidos as $pedido): ?>
                 <tr>
-                    <th>ID Pedido</th>
-                    <th>Nome do Cliente</th>
-                    <th>Contato</th>
-                    <th>Status</th>
-                    <th>Servico</th>
-                    <th>Descricao</th>
-                    <th>Data do Pedido</th>
+                    <td><?= htmlspecialchars($pedido['id']) ?></td>
+                    <td><?= htmlspecialchars($pedido['Nome']) ?></td>
+                    <td><?= htmlspecialchars($pedido['telefone']) ?></td>
+                    <td><?= htmlspecialchars($pedido['status']) ?></td>
+                    <td><?= htmlspecialchars($pedido['servico']) ?></td>
+                    <td><?= htmlspecialchars($pedido['data_pedido']) ?></td>
                 </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($pedidos as $pedido): ?>
-                <tr>
-                    <td><?php echo $pedido['id']; ?></td>
-                    <td><?php echo $pedido['ID_usuario']; ?></td>
-                    <td><?php echo htmlspecialchars($pedido['servico']); ?></td>
-                    <td><?php echo htmlspecialchars($pedido['descricao']); ?></td>
-                    <td><?php echo $pedido['data_pedido']; ?></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+            <?php endforeach; ?>
+        </tbody>
+   </table>
         
         
         <a href="home.php" class="btn-contrate">Voltar</a>

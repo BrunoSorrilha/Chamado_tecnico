@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 if (!isset($_SESSION['user_id']) || $_SESSION['adm'] != 1) {
@@ -8,31 +8,47 @@ if (!isset($_SESSION['user_id']) || $_SESSION['adm'] != 1) {
 
 include 'conectar.php';
 
-$stmt = $pdo->prepare("SELECT * FROM pedidos ORDER BY data_pedido DESC");
-$stmt->execute();
-$pedidos = $stmt->fetchAll();
-
 $servicoFiltro = $_GET['servico'] ?? '';
 $idUsuarioFiltro = $_GET['ID_usuario'] ?? '';
 
-$query = "SELECT * FROM pedidos WHERE 1=1";
+$query = "
+    SELECT 
+        pedidos.id,
+        usuario.Nome,
+        usuario.telefone,
+        pedidos.status,
+        pedidos.servico,
+        pedidos.ID_usuario,
+        pedidos.data_pedido,
+        pedidos.descricao,
+        pedidos.ID_tecnico
+    FROM 
+        pedidos
+    INNER JOIN 
+        usuario ON pedidos.ID_usuario = usuario.ID_usuario
+    WHERE 1=1
+";
+
 $params = [];
 
-if ($servicoFiltro) {
-    $query .= " AND servico = ?";
+if (!empty($servicoFiltro)) {
+    $query .= " AND pedidos.servico = ?";
     $params[] = $servicoFiltro;
 }
 
-if ($idUsuarioFiltro) {
-    $query .= " AND ID_usuario = ?";
+if (!empty($idUsuarioFiltro)) {
+    $query .= " AND pedidos.ID_usuario = ?";
     $params[] = $idUsuarioFiltro;
 }
 
-$query .= " ORDER BY data_pedido DESC";
+$query .= " ORDER BY pedidos.data_pedido DESC";
+
 $stmt = $pdo->prepare($query);
 $stmt->execute($params);
 $pedidos = $stmt->fetchAll();
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -118,20 +134,28 @@ $pedidos = $stmt->fetchAll();
                     <th>Selecionar</th>
                     <th>ID Pedido</th>
                     <th>ID Usuario</th>
+                    <th>Cliente</th>
+                    <th>Contato</th>
                     <th>Servico</th>
                     <th>Descricao</th>
-                    <th>Data do Pedido</th>
+                    <th>Data do pedido</th>
+                    <th>Tecnico</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($pedidos as $pedido): ?>
                 <tr>
                     <td><input type="checkbox" name="pedidos_selecionados[]" value="<?php echo $pedido['id']; ?>"></td>
-                    <td><?php echo $pedido['id']; ?></td>
-                    <td><?php echo $pedido['ID_usuario']; ?></td>
-                    <td><?php echo htmlspecialchars($pedido['servico']); ?></td>
-                    <td><?php echo htmlspecialchars($pedido['descricao']); ?></td>
-                    <td><?php echo $pedido['data_pedido']; ?></td>
+                    <td><?= htmlspecialchars($pedido['id']) ?></td>
+                    <td><?= htmlspecialchars($pedido['ID_usuario']) ?></td>
+                    <td><?= htmlspecialchars($pedido['Nome']) ?></td>
+                    <td><?= htmlspecialchars($pedido['telefone']) ?></td>
+                    <td><?= htmlspecialchars($pedido['servico']) ?></td>
+                    <td><?= htmlspecialchars($pedido['descricao']) ?></td>
+                    <td><?= htmlspecialchars($pedido['data_pedido']) ?></td>
+                    <td><?= htmlspecialchars($pedido['ID_tecnico']) ?></td>
+                    <td><?= htmlspecialchars($pedido['status']) ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

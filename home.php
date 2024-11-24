@@ -35,7 +35,7 @@ $adm = $_SESSION['adm'];
             <p>Aqui valorizamos voce, e sua satisfacao</p>
             <a href="suporte.php" class="btn-contrate">Contrate-nos</a>
             <a href="editcar.php" class="btn-contrate">perfil</a>
-            <a href="historico.php" class="btn-contrate">histórico</a>
+            <a href="historico.php" class="btn-contrate">historico</a>
             <?php if ($adm == 1): ?>
                 <a href="dashboard.php" class="btn-contrate">administrar</a>
             <?php endif; ?>

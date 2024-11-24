@@ -3,30 +3,44 @@ session_start();
 
 include 'conectar.php';
 
-$stmt = $pdo->prepare("SELECT * FROM pedidos ORDER BY data_pedido DESC");
-$stmt->execute();
-$pedidos = $stmt->fetchAll();
-
 $servicoFiltro = $_GET['servico'] ?? '';
 $idUsuarioFiltro = $_GET['ID_usuario'] ?? '';
 
-$query = "SELECT * FROM pedidos WHERE 1=1";
+$query = "
+    SELECT 
+        pedidos.id,
+        usuario.Nome,
+        usuario.telefone,
+        pedidos.status,
+        pedidos.servico,
+        pedidos.ID_usuario,
+        pedidos.data_pedido,
+        pedidos.descricao
+    FROM 
+        pedidos
+    INNER JOIN 
+        usuario ON pedidos.ID_usuario = usuario.ID_usuario
+    WHERE 1=1
+";
+
 $params = [];
 
-if ($servicoFiltro) {
-    $query .= " AND servico = ?";
+if (!empty($servicoFiltro)) {
+    $query .= " AND pedidos.servico = ?";
     $params[] = $servicoFiltro;
 }
 
-if ($idUsuarioFiltro) {
-    $query .= " AND ID_usuario = ?";
+if (!empty($idUsuarioFiltro)) {
+    $query .= " AND pedidos.ID_usuario = ?";
     $params[] = $idUsuarioFiltro;
 }
 
-$query .= " ORDER BY data_pedido DESC";
+$query .= " ORDER BY pedidos.data_pedido DESC";
+
 $stmt = $pdo->prepare($query);
 $stmt->execute($params);
 $pedidos = $stmt->fetchAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +106,7 @@ $pedidos = $stmt->fetchAll();
         </div>
         <div class="projects-section">
 
-        <form method="GET" action="tecnico.php">
+    <form method="GET" action="tecnico.php">
         <label for="servico">Filtrar por Servico:</label>
         <select class="" id="servico" name="servico">
             <option value="">Todos</option>
@@ -100,41 +114,39 @@ $pedidos = $stmt->fetchAll();
             <option value="software" <?php if ($servicoFiltro == 'software') echo 'selected'; ?>>Manutencao de Software</option>
             <option value="consultoria" <?php if ($servicoFiltro == 'consultoria') echo 'selected'; ?>>Consultoria</option>
         </select>
-        
-        <label for="id_usuario">Filtrar por ID do Usuario:</label>
-        <input type="text" id="id_usuario" name="id_usuario" value="<?php echo htmlspecialchars($idUsuarioFiltro); ?>">
 
         <button type="submit">Buscar</button>
     </form>
+    <form action="alterar_status.php" method="POST">
         <table border="1">
             <thead>
                 <tr>
                     <th>Selecionar</th>
                     <th>ID Pedido</th>
                     <th>Nome do Cliente</th>
+                    <th>Contato</th>
                     <th>Servico</th>
                     <th>Descricao</th>
                     <th>Data do Pedido</th>
                     <th>Status</th>
-                    <th>Contato</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($pedidos as $pedido): ?>
                 <tr>
                     <td><input type="checkbox" name="pedidos_selecionados[]" value="<?php echo $pedido['id']; ?>"></td>
-                    <td><?php echo $pedido['id']; ?></td>
-                    <td><?php echo $pedido['ID_usuario']; ?></td>
-                    <td><?php echo htmlspecialchars($pedido['servico']); ?></td>
-                    <td><?php echo htmlspecialchars($pedido['descricao']); ?></td>
-                    <td><?php echo $pedido['data_pedido']; ?></td>
+                    <td><?= htmlspecialchars($pedido['id']) ?></td>
+                    <td><?= htmlspecialchars($pedido['Nome']) ?></td>
+                    <td><?= htmlspecialchars($pedido['telefone']) ?></td>
+                    <td><?= htmlspecialchars($pedido['servico']) ?></td>
+                    <td><?= htmlspecialchars($pedido['descricao']) ?></td>
+                    <td><?= htmlspecialchars($pedido['data_pedido']) ?></td>
+                    <td><?= htmlspecialchars($pedido['status']) ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-        
-        
-        <button type="submit">Aceitar Pedido Selecionado</button>
+         <button type="submit">Aceitar Pedido Selecionado</button>
     </form>
         <div class="projects-section-header">
         
