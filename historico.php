@@ -1,12 +1,8 @@
 <?php 
 session_start();
 
-if (!isset($_SESSION['user_id']) || $_SESSION['adm'] != 1) {
-    header("Location: login.html");
-    exit();
-}
-
 include 'conectar.php';
+
 
 $stmt = $pdo->prepare("SELECT * FROM pedidos ORDER BY data_pedido DESC");
 $stmt->execute();
@@ -43,6 +39,7 @@ $pedidos = $stmt->fetchAll();
     <title></title>
     <link rel="stylesheet" href="./css/dashboard.css">
     <link rel="stylesheet" href="./css/button.css">
+    <link rel="stylesheet" href="./css/home.css">
 </head>
 <body>
     
@@ -97,7 +94,7 @@ $pedidos = $stmt->fetchAll();
         </div>
         <div class="projects-section">
 
-        <form method="GET" action="dashboard.php">
+        <form method="GET" action="historico.php">
         <label for="servico">Filtrar por Servico:</label>
         <select class="" id="servico" name="servico">
             <option value="">Todos</option>
@@ -111,11 +108,9 @@ $pedidos = $stmt->fetchAll();
 
         <button type="submit">Buscar</button>
     </form>
-        <form action="excluir_pedidos.php" method="POST">
         <table border="1">
             <thead>
                 <tr>
-                    <th>Selecionar</th>
                     <th>ID Pedido</th>
                     <th>Nome do Cliente</th>
                     <th>Contato</th>
@@ -128,7 +123,6 @@ $pedidos = $stmt->fetchAll();
             <tbody>
                 <?php foreach ($pedidos as $pedido): ?>
                 <tr>
-                    <td><input type="checkbox" name="pedidos_selecionados[]" value="<?php echo $pedido['id']; ?>"></td>
                     <td><?php echo $pedido['id']; ?></td>
                     <td><?php echo $pedido['ID_usuario']; ?></td>
                     <td><?php echo htmlspecialchars($pedido['servico']); ?></td>
@@ -140,7 +134,7 @@ $pedidos = $stmt->fetchAll();
         </table>
         
         
-        <button type="submit">cancelar pedido</button>
+        <a href="home.php" class="btn-contrate">Voltar</a>
     </form>
         <div class="projects-section-header">
         

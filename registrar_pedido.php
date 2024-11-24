@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    $stmt = $pdo->prepare("INSERT INTO pedidos (ID_usuario, servico, descricao) VALUES (?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO pedidos (ID_usuario, servico, descricao, Status) VALUES (?, ?, ?, 'Pendente')");
     if ($stmt->execute([$id_usuario, $servico, $descricao])) {
         echo "Pedido registrado com sucesso!";
         header("Location: pay.html");

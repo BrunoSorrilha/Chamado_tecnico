@@ -1,11 +1,6 @@
 <?php 
 session_start();
 
-if (!isset($_SESSION['user_id']) || $_SESSION['adm'] != 1) {
-    header("Location: login.html");
-    exit();
-}
-
 include 'conectar.php';
 
 $stmt = $pdo->prepare("SELECT * FROM pedidos ORDER BY data_pedido DESC");
@@ -97,7 +92,7 @@ $pedidos = $stmt->fetchAll();
         </div>
         <div class="projects-section">
 
-        <form method="GET" action="dashboard.php">
+        <form method="GET" action="tecnico.php">
         <label for="servico">Filtrar por Servico:</label>
         <select class="" id="servico" name="servico">
             <option value="">Todos</option>
@@ -111,7 +106,6 @@ $pedidos = $stmt->fetchAll();
 
         <button type="submit">Buscar</button>
     </form>
-        <form action="excluir_pedidos.php" method="POST">
         <table border="1">
             <thead>
                 <tr>
